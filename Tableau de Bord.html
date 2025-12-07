@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion Complet Creation</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Inter", sans-serif;
+        }
+
+        body {
+            background: #f5f6fa;
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .grid {
+            width: 95%;
+            max-width: 1300px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            transition: 0.3s ease, background 0.3s, color 0.3s, transform 0.3s;
+            border: 1px solid #e6e6e6;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 28px rgba(0,0,0,0.12);
+        }
+
+        .top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-row img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: contain;
+            background: #f7f7f7;
+            padding: 5px;
+            transition: transform 0.3s;
+        }
+
+        .top-row img:hover {
+            transform: scale(1.1);
+        }
+
+        .save {
+            cursor: default;
+            background: #f0f0f0;
+            padding: 6px 14px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #555;
+            transition: 0.3s;
+        }
+
+        .save.online { background: #d1ffd1; color: #2a7f2a; }
+        .save.offline { background: #ffdada; color: #c33; }
+
+        .company {
+            color: #777;
+            margin-top: 16px;
+            font-size: 14px;
+        }
+
+        .job-title {
+            margin: 6px 0 16px;
+            font-size: 21px;
+            font-weight: 700;
+            color: #222;
+        }
+
+        .tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .tag {
+            background: #f1f3f9;
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #555;
+            border: 1px solid #e6e6e6;
+            transition: 0.3s;
+        }
+
+        .tag.highlight {
+            background-color: #ffe066;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .salary {
+            font-size: 17px;
+            font-weight: 600;
+            color: #111;
+            margin-bottom: 4px;
+        }
+
+        .location {
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 16px;
+        }
+
+        .apply-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+            color: #fff;
+            border-radius: 14px;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: 0.3s ease;
+            letter-spacing: 0.3px;
+        }
+
+        .apply-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+        }
+
+        .apply-btn a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        /* DARK MODE */
+        body.dark {
+            background: #1f1f2e;
+            color: #ddd;
+        }
+
+        body.dark .card {
+            background: #2b2b3d;
+            border: 1px solid #444;
+        }
+
+        body.dark .company {
+            color: #aaa;
+        }
+
+        body.dark .job-title {
+            color: #fff;
+        }
+
+        body.dark .tag {
+            background: #3b3b50;
+            color: #ddd;
+            border: 1px solid #555;
+        }
+
+        body.dark .tag.highlight {
+            background-color: #ffc107;
+            color: #111;
+        }
+
+        body.dark .salary {
+            color: #fff;
+        }
+
+        body.dark .location {
+            color: #bbb;
+        }
+
+        body.dark .apply-btn {
+            background: linear-gradient(90deg, #444, #666);
+        }
+
+        /* TOGGLE BUTTON */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #111;
+            color: #fff;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 1000;
+            transition: background 0.3s, color 0.3s;
+        }
+        .description{
+            position: absolute;
+            margin-top: -40px;
+            font-size: 20px;
+            margin-left: 30px;
+            color: #6a11cb;
+        }
+
+        body.dark .theme-toggle {
+            background: #ddd;
+            color: #111;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<button class="theme-toggle" onclick="toggleTheme()">Mode Sombre</button>
+
+<div class="grid">
+    <h1 class="description"> • Administration</h1>
+    <!-- CARD 1 -->
+    <div class="card">
+        <div class="top-row">
+            <img src="images/ENIFMAUP NOIR.png">
+            <div class="save online">En ligne 🟢</div>
+        </div>
+
+        <div class="company">Start-Up • Technologie</div>
+        <div class="job-title">EnigmaUp</div>
+
+        <div class="tags">
+            <div class="tag highlight">Léon</div>
+            <div class="tag">Redi</div>
+            <div class="tag">Jordan</div>
+        </div>
+
+        <div class="salary">$0/Mois</div>
+        <div class="location">Vitrine Site</div>
+
+        <a href="#"><button class="apply-btn">Visiter</button></a>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="card">
+        <div class="top-row">
+            <img src="images/Digicreateam Noir.png">
+            <div class="save offline">Hors ligne 🔴</div>
+        </div>
+
+        <div class="company">Start-Up • Innovation</div>
+        <div class="job-title">Digicreateam</div>
+
+        <div class="tags">
+            <div class="tag">Baraka</div>
+            <div class="tag highlight">Jordan</div>
+            <div class="tag">Divine</div>
+        </div>
+
+        <div class="salary">$0/Mois</div>
+        <div class="location">Site Dynamique</div>
+
+        <a href="https://jordandev8262.github.io/SiteWebDigicreateam/admin-login"><button class="apply-btn">Visiter</button></a>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="card">
+        <div class="top-row">
+            <img src="images/Digicreateam Noir.png">
+            <div class="save offline">Hors ligne 🔴</div>
+        </div>
+
+        <div class="company">Plateform • Digicreateam</div>
+        <div class="job-title">Digishop France</div>
+
+        <div class="tags">
+            <div class="tag">Vente</div>
+            <div class="tag">Importation</div>
+        </div>
+
+        <div class="salary">$1/Min</div>
+        <div class="location">E-Commerce</div>
+
+        <a href="#"><button class="apply-btn">Visiter</button></a>
+    </div>
+    <!-- CARD 4 -->
+    <div class="card">
+        <div class="top-row">
+            <img src="images/ENIFMAUP NOIR.png">
+            <div class="save online">En ligne 🟢</div>
+        </div>
+
+        <div class="company">Plateforme • Enigmaup</div>
+        <div class="job-title">Talisabisoyesu Info</div>
+
+        <div class="tags">
+            <div class="tag">Chrétiens</div>
+            <div class="tag">Eglise</div>
+        </div>
+
+        <div class="salary">$0/Mois</div>
+        <div class="location">Site Information</div>
+
+        <a href=""><button class="apply-btn">Visiter</button></a>
+    </div>
+
+    <!-- CARD 5 -->
+    <div class="card">
+        <div class="top-row">
+            <img src="images/Digicreateam Noir.png">
+            <div class="save offline">Hors ligne 🔴</div>
+        </div>
+
+        <div class="company">plateform • Digicreateam</div>
+        <div class="job-title">Digischool</div>
+
+        <div class="tags">
+            <div class="tag">Ecole</div>
+            <div class="tag">Formation Educ</div>
+        </div>
+
+        <div class="salary">$29/Mois</div>
+        <div class="location">Application Web</div>
+
+        <a href="https://school-management-gules-six.vercel.app/super-admin/login"><button class="apply-btn">Visiter</button></a>
+    </div>
+
+    <!-- CARD 6 -->
+    <div class="card">
+        <div class="top-row">
+            <img src="images/ENIFMAUP NOIR.png">
+            <div class="save online">En ligne 🟢</div>
+        </div>
+
+        <div class="company">plateform • EnigmaUp</div>
+        <div class="job-title">Talisabisoyesu</div>
+
+        <div class="tags">
+            <div class="tag">Podcast</div>
+            <div class="tag">Méditation</div>
+        </div>
+
+        <div class="salary">$1/Min</div>
+        <div class="location">Application Web</div>
+
+        <a href="#"><button class="apply-btn">Visiter</button></a>
+    </div>
+
+</div>
+
+<script>
+    function toggleTheme() {
+        document.body.classList.toggle('dark');
+        const btn = document.querySelector('.theme-toggle');
+        btn.textContent = document.body.classList.contains('dark') ? 'Mode Clair' : 'Mode Sombre';
+    }
+</script>
+
+</body>
+</html>
