@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ProfilDéveloppeurFreelance</title>
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --muted:#9aa4b2; --accent:#7c3aed; --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(255,255,255,0.02);
+      --text:#e6eef8;
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial; background:linear-gradient(180deg,#081024 0%, #06111b 100%); color:var(--text);}
+
+    .wrap{max-width:1100px;margin:48px auto;padding:28px;display:grid;grid-template-columns:320px 1fr;gap:28px}
+
+    /* Left column */
+    .card{background:linear-gradient(180deg,var(--card), #06111b);border-radius:var(--radius);padding:22px;box-shadow:0 6px 30px rgba(2,6,23,0.6);backdrop-filter: blur(6px);}
+    .avatar{width:100%;display:flex;flex-direction:column;align-items:center;gap:14px}
+    .photo{width:160px;height:160px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#2dd4bf);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:54px;color:#051023;box-shadow:0 6px 20px rgba(0,0,0,0.6)}
+    h1{font-size:20px;margin:0}
+    .role{color:var(--muted);font-size:13px}
+    .location{font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:center}
+
+    .contact{margin-top:18px;display:grid;gap:8px}
+    .contact a{display:flex;gap:10px;align-items:center;padding:10px;border-radius:10px;background:var(--glass);text-decoration:none;color:var(--text);font-size:14px}
+    .contact a .dot{width:10px;height:10px;border-radius:50%;background:var(--accent)}
+
+    .skills{margin-top:18px}
+    .skill{display:flex;justify-content:space-between;align-items:center;margin:10px 0}
+    .bar{height:10px;background:var(--glass-2);border-radius:999px;overflow:hidden;flex:1;margin-left:12px}
+    .bar > span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#06b6d4)}
+
+    /* Right column */
+    .main{display:flex;flex-direction:column;gap:18px}
+    .section{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:18px;border-radius:12px}
+    .section h2{margin:0 0 10px 0;font-size:16px}
+    .about p{color:var(--muted);line-height:1.6}
+
+    .timeline{display:flex;flex-direction:column;gap:12px}
+    .item{display:flex;gap:14px}
+    .item .meta{min-width:110px;color:var(--muted);font-size:13px}
+    .item .body{flex:1}
+    .body h3{margin:0;font-size:15px}
+    .body p{margin:6px 0 0 0;color:var(--muted);font-size:14px}
+
+    .buttons{display:flex;gap:12px;margin-top:12px}
+    .btn{padding:10px 14px;border-radius:10px;background:var(--accent);color:#021025;text-decoration:none;font-weight:600}
+    .btn.outline{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text)}
+
+    /* responsivity */
+    @media (max-width:880px){.wrap{grid-template-columns:1fr;padding:18px}.photo{width:130px;height:130px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <aside class="card">
+      <div class="avatar">
+        <div class="photo">JS</div>
+        <div style="text-align:center">
+          <h1>Jordan Sofila</h1>
+          <div class="role">Développeur Full‑Stack Freelance</div>
+          <div class="location">📍 Kinshasa · Disponible à distance</div>
+        </div>
+      </div>
+
+      <div class="contact">
+        <a href="mailto:youremail@example.com"><span class="dot"></span>jordansofiladev@gmail.com</a>
+        <a href="#portfolio"><span class="dot"></span> Portfolio / Projets</a>
+        <a href="#contact"><span class="dot"></span> +243 826 245 169</a>
+      </div>
+
+      <div class="skills">
+        <h3 style="margin-top:16px">Compétences</h3>
+        <div class="skill"><strong>JavaScript</strong><div class="bar"><span style="width:92%"></span></div></div>
+        <div class="skill"><strong>React / Next.js</strong><div class="bar"><span style="width:88%"></span></div></div>
+        <div class="skill"><strong>Node.js / API</strong><div class="bar"><span style="width:82%"></span></div></div>
+        <div class="skill"><strong>UI / UX</strong><div class="bar"><span style="width:74%"></span></div></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="section about">
+        <h2>À propos</h2>
+        <p>Je suis développeur freelance spécialisé en applications web modernes (React, Next.js, Node.js). J'aide les startups et PME à transformer des idées en produits robustes et maintenables. Rapidité d'exécution, code propre et communication claire sont mes priorités.</p>
+        <div class="buttons">
+          <a class="btn" href="#contact">Me contacter</a>
+          <a class="btn outline" href="#cv">Télécharger CV</a>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Expérience</h2>
+        <div class="timeline">
+          <div class="item">
+            <div class="meta">2023 — Aujourd'hui</div>
+            <div class="body">
+              <h3>Développeur Full‑Stack — Freelance</h3>
+              <p>Conception et développement d'applications web, intégration d'API, optimisation des performances et déploiements continus.</p>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="meta">2021 — 2023</div>
+            <div class="body">
+              <h3>Ingénieur Front‑end — StartUp XYZ</h3>
+              <p>Refonte UI, migration vers React, amélioration de l'accessibilité et réduction des temps de chargement.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="portfolio" class="section">
+        <h2>Projets récents</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+          <div style="padding:12px;border-radius:10px;background:var(--glass)">
+            <strong>Gestion de stock</strong>
+            <p style="color:var(--muted);font-size:13px;margin:8px 0 0">App web full‑stack pour PME — React + Node</p>
+          </div>
+          <div style="padding:12px;border-radius:10px;background:var(--glass)">
+            <strong>Plateforme e‑learning</strong>
+            <p style="color:var(--muted);font-size:13px;margin:8px 0 0">Système de cours et paiement — Next.js, Stripe</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section">
+        <h2>Contact</h2>
+        <p style="color:var(--muted)">Envoyez‑moi un message : <a href="mailto:jordansofiladev@gmail.com" style="color:var(--text);text-decoration:underline">jordansofiladev@gmail.com</a></p>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
