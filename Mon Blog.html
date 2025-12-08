@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mon Blog — Titre du Blog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0e1117;
+      --card:#151a23;
+      --muted:#9aa4b2;
+      --accent:#6d5cff;
+      --accent2:#4ad0ff;
+      --text:#eef3fb;
+      --radius:14px;
+      --shadow:0 8px 24px rgba(0,0,0,0.25);
+      --maxw:1100px;
+      --transition:0.25s ease;
+    }
+    *{box-sizing:border-box;transition:var(--transition)}
+    body{
+      margin:0;font-family:Inter,system-ui;line-height:1.5;
+      background:radial-gradient(circle at top,#0f172a,#0a0f1c 60%);
+      color:var(--text);padding:32px;display:flex;justify-content:center;
+    }
+    .wrap{max-width:var(--maxw);width:100%}
+
+    /* HEADER */
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
+    .logo{width:60px;height:60px;border-radius:var(--radius);background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:800;color:#02112a;font-size:22px;box-shadow:var(--shadow)}
+    nav a{color:var(--muted);padding:10px 14px;border-radius:8px;text-decoration:none;font-size:14px}
+    nav a:hover{background:rgba(255,255,255,0.05);color:var(--text)}
+    .theme-toggle{border:none;background:#1b2433;padding:10px;border-radius:10px;font-size:18px;color:var(--muted);cursor:pointer}
+    .theme-toggle:hover{background:#222c42;color:var(--text)}
+
+    /* HERO */
+    .hero{background:linear-gradient(to bottom right,rgba(109,92,255,0.15),rgba(74,208,255,0.12));padding:26px;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .hero h1{font-size:30px;margin:0 0 6px}
+    .hero p{color:var(--muted);font-size:15px}
+
+    /* GRID */
+    .grid{display:grid;grid-template-columns:1fr 330px;gap:26px;margin-top:22px}
+
+    /* POSTS */
+    .posts{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+    .card{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.03)}
+    .card:hover{transform:translateY(-4px);background:#181e28}
+    .card h3{margin:0;font-size:19px;font-weight:600}
+    .meta{margin-top:6px;font-size:13px;color:var(--muted)}
+    .excerpt{margin-top:10px;color:var(--muted);font-size:14px}
+    .read-btn{display:inline-block;margin-top:12px;padding:9px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#02112a;text-decoration:none;font-weight:600;box-shadow:var(--shadow)}
+
+    /* SIDEBAR */
+    aside .box{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.03)}
+    .search{display:flex;gap:10px}
+    .search input{flex:1;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.07);background:#0f1420;color:var(--text)}
+    .tag{background:#1c2333;padding:7px 10px;border-radius:8px;display:inline-block;margin:6px 6px 0 0;color:var(--muted);font-size:13px}
+
+    /* FOOTER */
+    footer{text-align:center;margin-top:34px;color:var(--muted);font-size:13px}
+
+    /* RESPONSIVE */
+    @media(max-width:900px){.grid{grid-template-columns:1fr}.posts{grid-template-columns:1fr}nav{display:none}}
+
+    /* ARTICLE MODAL */
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;padding:24px}
+    .overlay.open{display:flex}
+    .article-modal{background:var(--card);padding:28px;border-radius:var(--radius);width:min(900px,100%);max-height:90vh;overflow:auto;box-shadow:var(--shadow)}
+    .closeBtn{margin-top:16px;padding:10px 14px;border:1px solid rgba(255,255,255,0.08);background:transparent;border-radius:10px;color:var(--muted);cursor:pointer}
+    .closeBtn:hover{background:#1c2535;color:var(--text)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">B</div>
+        <div>
+          <div class="site-title">Mon Blog</div>
+          <div class="site-sub">Idées, tutoriels, et récits — publié régulièrement</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <nav>
+          <a href="#">Accueil</a>
+          <a href="#">Catégories</a>
+          <a href="#">À propos</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button id="themeToggle" class="theme-toggle" aria-pressed="false">🌙</button>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section>
+        <div class="hero">
+          <h1>Bienvenue sur mon blog</h1>
+          <p>Des articles courts et pratiques sur le développement, la productivité et le design. Parcourez les derniers posts ci-dessous.</p>
+        </div>
+
+        <div class="posts" id="posts">
+          <!-- Card 1 -->
+          <article class="card" data-title="Comment construire un portfolio en 1 jour" data-content="Un guide pas à pas pour créer un portfolio professionnel en une journée, même si vous partez de zéro.">
+            <h3>Comment construire un portfolio en 1 jour</h3>
+            <div class="meta">Dev • 8 déc. 2025 • 6 min de lecture</div>
+            <p class="excerpt">Un guide pas à pas pour créer un portfolio professionnel en une journée, même si vous partez de zéro.</p>
+            <a class="read-btn" href="#" data-open>Lire</a>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="card" data-title="10 astuces CSS que tout dev devrait connaître" data-content="Astuces CSS pratiques pour améliorer votre productivité: variables, layout moderne, animations légères, et plus.">
+            <h3>10 astuces CSS que tout dev devrait connaître</h3>
+            <div class="meta">Design • 1 déc. 2025 • 4 min</div>
+            <p class="excerpt">Astuces CSS pratiques pour améliorer votre productivité: variables, layout moderne, animations légères, et plus.</p>
+            <a class="read-btn" href="#" data-open>Lire</a>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="card" data-title="Organiser sa semaine: méthode simple" data-content="Une méthode simple (et flexible) pour planifier ta semaine et garder de l'énergie pour coder et apprendre.">
+            <h3>Organiser sa semaine: méthode simple</h3>
+            <div class="meta">Productivité • 21 nov. 2025 • 3 min</div>
+            <p class="excerpt">Une méthode simple (et flexible) pour planifier ta semaine et garder de l'énergie pour coder et apprendre.</p>
+            <a class="read-btn" href="#" data-open>Lire</a>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="card" data-title="Créer une page responsive sans framework" data-content="Techniques pour construire des pages responsive faciles à maintenir, avec du CSS moderne et peu de JS.">
+            <h3>Créer une page responsive sans framework</h3>
+            <div class="meta">Web • 11 nov. 2025 • 5 min</div>
+            <p class="excerpt">Techniques pour construire des pages responsive faciles à maintenir, avec du CSS moderne et peu de JS.</p>
+            <a class="read-btn" href="#" data-open>Lire</a>
+          </article>
+
+        </div>
+
+        <footer>
+          <p>© 2025 — Mon Blog. Tous droits réservés.</p>
+        </footer>
+      </section>
+
+      <aside>
+        <div class="box">
+          <form class="search" onsubmit="event.preventDefault();filterPosts()">
+            <input id="q" type="search" placeholder="Rechercher des articles...">
+            <button class="read-btn" style="padding:8px 10px">Recherche</button>
+          </form>
+        </div>
+
+        <div class="box">
+          <h4>À propos</h4>
+          <p style="color:var(--muted);font-size:14px;margin-top:8px">Salut — je suis auteur·ice du blog. J'écris sur le développement web, le design et la productivité.</p>
+        </div>
+
+        <div class="box">
+          <h4>Catégories</h4>
+          <div style="margin-top:8px">
+            <span class="tag">Dev</span><span class="tag">Design</span><span class="tag">Productivité</span><span class="tag">Inspiration</span>
+          </div>
+        </div>
+
+        <div class="box">
+          <h4>Abonne-toi</h4>
+          <p style="color:var(--muted);font-size:14px;margin-top:8px">Reçois les nouveaux articles par e-mail.</p>
+          <form onsubmit="event.preventDefault();alert('Merci !')">
+            <input type="email" placeholder="ton@email.com" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)">
+            <button class="read-btn" style="width:100%;margin-top:8px">S'abonner</button>
+          </form>
+        </div>
+
+      </aside>
+    </main>
+
+    <!-- Article modal -->
+    <div id="overlay" class="overlay" role="dialog" aria-hidden="true">
+      <div class="article-modal" role="document">
+        <h2 id="modalTitle">Titre</h2>
+        <p id="modalMeta" style="color:var(--muted)">Meta • date</p>
+        <div id="modalContent">
+          <p style="color:var(--muted)">Contenu de l'article...</p>
+        </div>
+        <button id="closeModal" class="closeBtn">Fermer</button>
+      </div>
+    </div>
+
+    <!-- Contact anchor for nav -->
+    <div id="contact" style="height:1px"></div>
+  </div>
+
+  <script>
+    // Theme toggle (persist in localStorage)
+    const root = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+    const LS_KEY = 'blog_theme_light';
+    function applyTheme(isLight){
+      if(isLight){
+        root.classList.add('light');
+        toggle.textContent = '☀️';
+        toggle.setAttribute('aria-pressed','true');
+      } else {
+        root.classList.remove('light');
+        toggle.textContent = '🌙';
+        toggle.setAttribute('aria-pressed','false');
+      }
+    }
+    const saved = localStorage.getItem(LS_KEY) === '1';
+    applyTheme(saved);
+    toggle.addEventListener('click', ()=>{const is = !root.classList.contains('light');applyTheme(is);localStorage.setItem(LS_KEY, is? '1':'0')});
+
+    // Simple post open modal
+    document.querySelectorAll('[data-open]').forEach(btn=>{
+      btn.addEventListener('click',(e)=>{
+        e.preventDefault();
+        const art = e.target.closest('article');
+        const title = art.dataset.title || art.querySelector('h3').textContent;
+        const content = art.dataset.content || art.querySelector('.excerpt').textContent;
+        document.getElementById('modalTitle').textContent = title;
+        document.getElementById('modalContent').innerHTML = '<p>'+content+'</p><p style="color:var(--muted)">(Contenu complet à écrire...)</p>';
+        document.getElementById('overlay').classList.add('open');
+        document.getElementById('overlay').setAttribute('aria-hidden','false');
+      })
+    })
+    document.getElementById('closeModal').addEventListener('click',()=>{document.getElementById('overlay').classList.remove('open');document.getElementById('overlay').setAttribute('aria-hidden','true')});
+
+    // Simple search/filter
+    function filterPosts(){
+      const q = (document.getElementById('q').value || '').toLowerCase();
+      document.querySelectorAll('#posts article').forEach(a=>{
+        const t = (a.dataset.title + ' ' + a.dataset.content + ' ' + a.textContent).toLowerCase();
+        a.style.display = t.includes(q) ? '' : 'none';
+      })
+    }
+
+    // Keyboard accessibility: close modal on Esc
+    document.addEventListener('keydown', e=>{ if(e.key === 'Escape') document.getElementById('overlay').classList.remove('open')});
+
+  </script>
+</body>
+</html>
